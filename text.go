@@ -167,14 +167,14 @@ func (l *Logger) textFormatter(level Level, keyvals ...interface{}) {
 			}
 		case PrefixKey:
 			if prefix, ok := keyvals[i+1].(string); ok {
-				prefix = PrefixStyle.Renderer(l.re).Render(prefix + ":")
+				prefix = PrefixStyle.Renderer(l.re).Render(prefix)
 				l.b.WriteString(prefix)
 				l.b.WriteByte(' ')
 			}
 		case MessageKey:
 			if msg := keyvals[i+1]; msg != nil {
 				m := fmt.Sprint(msg)
-				m = MessageStyle.Renderer(l.re).Render(m)
+				m = MessageFormatter(level, l.re, m)
 				l.b.WriteString(m)
 			}
 		default:

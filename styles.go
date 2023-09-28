@@ -19,6 +19,10 @@ var (
 	// MessageStyle is the style for messages.
 	MessageStyle = lipgloss.NewStyle()
 
+	MessageFormatter = func (level Level, re *lipgloss.Renderer, msg string) string  {
+		return MessageStyle.Renderer(re).Render(msg)
+	}
+
 	// KeyStyle is the style for keys.
 	KeyStyle = lipgloss.NewStyle().Faint(true)
 
