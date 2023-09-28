@@ -8,7 +8,7 @@ import (
 
 func TestDefaultLevel(t *testing.T) {
 	var level Level
-	assert.Equal(t, InfoLevel, level)
+	assert.Equal(t, DebugLevel, level)
 }
 func TestParseLevel(t *testing.T) {
 	testCases := []struct {
@@ -16,6 +16,11 @@ func TestParseLevel(t *testing.T) {
 		level    string
 		expLevel Level
 	}{
+		{
+			name:     "Parse trace",
+			level:    "trace",
+			expLevel: TraceLevel,
+		},
 		{
 			name:     "Parse debug",
 			level:    "debug",

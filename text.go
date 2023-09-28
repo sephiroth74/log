@@ -142,7 +142,7 @@ func needsQuoting(str string) bool {
 	return false
 }
 
-func (l *Logger) textFormatter(keyvals ...interface{}) {
+func (l *Logger) textFormatter(level Level, keyvals ...interface{}) {
 	for i := 0; i < len(keyvals); i += 2 {
 		switch keyvals[i] {
 		case TimestampKey:

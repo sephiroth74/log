@@ -15,6 +15,8 @@ func (l *stdLogWriter) Write(p []byte) (n int, err error) {
 
 	if l.opt != nil {
 		switch l.opt.ForceLevel {
+		case TraceLevel:
+			l.l.Trace(str)
 		case DebugLevel:
 			l.l.Debug(str)
 		case InfoLevel:
@@ -26,6 +28,8 @@ func (l *stdLogWriter) Write(p []byte) (n int, err error) {
 		}
 	} else {
 		switch {
+		case strings.HasPrefix(str, "TRACE"):
+			l.l.Trace(strings.TrimSpace(str[5:]))
 		case strings.HasPrefix(str, "DEBUG"):
 			l.l.Debug(strings.TrimSpace(str[5:]))
 		case strings.HasPrefix(str, "INFO"):

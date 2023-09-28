@@ -147,6 +147,11 @@ func Helper() {
 	defaultLogger.helper(1)
 }
 
+// Trace logs a trace message.
+func Trace(msg interface{}, keyvals ...interface{}) {
+	defaultLogger.log(TraceLevel, msg, keyvals...)
+}
+
 // Debug logs a debug message.
 func Debug(msg interface{}, keyvals ...interface{}) {
 	defaultLogger.log(DebugLevel, msg, keyvals...)
@@ -176,6 +181,11 @@ func Fatal(msg interface{}, keyvals ...interface{}) {
 // Print logs a message with no level.
 func Print(msg interface{}, keyvals ...interface{}) {
 	defaultLogger.log(noLevel, msg, keyvals...)
+}
+
+// Tracef logs a trace message with formatting.
+func Tracef(format string, args ...interface{}) {
+	defaultLogger.log(TraceLevel, fmt.Sprintf(format, args...))
 }
 
 // Debugf logs a debug message with formatting.

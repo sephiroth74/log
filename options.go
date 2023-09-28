@@ -25,6 +25,12 @@ func NowUTC() time.Time {
 // CallerFormatter is the caller formatter.
 type CallerFormatter func(string, int, string) string
 
+// FilenameCallerFormatter is a caller formatter that returns the last level of the path
+// and line number.
+func FilenameCallerFormatter(file string, line int, funcName string) string {
+	return fmt.Sprintf("%s:%d", trimCallerPath(file, 1), line)
+}
+
 // ShortCallerFormatter is a caller formatter that returns the last 2 levels of the path
 // and line number.
 func ShortCallerFormatter(file string, line int, funcName string) string {

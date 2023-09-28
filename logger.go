@@ -102,7 +102,7 @@ func (l *Logger) log(level Level, msg interface{}, keyvals ...interface{}) {
 	case JSONFormatter:
 		l.jsonFormatter(kvs...)
 	default:
-		l.textFormatter(kvs...)
+		l.textFormatter(level, kvs...)
 	}
 
 	// WriteTo will reset the buffer
@@ -301,6 +301,11 @@ func (l *Logger) WithPrefix(prefix string) *Logger {
 	return sl
 }
 
+// Trace prints a trace message.
+func (l *Logger) Trace(msg interface{}, keyvals ...interface{}) {
+	l.log(TraceLevel, msg, keyvals...)
+}
+
 // Debug prints a debug message.
 func (l *Logger) Debug(msg interface{}, keyvals ...interface{}) {
 	l.log(DebugLevel, msg, keyvals...)
@@ -330,6 +335,11 @@ func (l *Logger) Fatal(msg interface{}, keyvals ...interface{}) {
 // Print prints a message with no level.
 func (l *Logger) Print(msg interface{}, keyvals ...interface{}) {
 	l.log(noLevel, msg, keyvals...)
+}
+
+// Tracef prints a trace message with formatting.
+func (l *Logger) Tracef(format string, args ...interface{}) {
+	l.log(TraceLevel, fmt.Sprintf(format, args...))
 }
 
 // Debugf prints a debug message with formatting.

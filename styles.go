@@ -29,6 +29,16 @@ var (
 	SeparatorStyle = lipgloss.NewStyle().Faint(true)
 
 	// DebugLevel is the style for debug level.
+	TraceLevelStyle = lipgloss.NewStyle().
+			SetString(strings.ToUpper(TraceLevel.String())).
+			Bold(true).
+			MaxWidth(4).
+			Foreground(lipgloss.AdaptiveColor{
+			Light: "34",
+			Dark:  "244",
+		})
+
+	// DebugLevel is the style for debug level.
 	DebugLevelStyle = lipgloss.NewStyle().
 			SetString(strings.ToUpper(DebugLevel.String())).
 			Bold(true).
@@ -88,6 +98,8 @@ var (
 // levelStyle is a helper function to get the style for a level.
 func levelStyle(level Level) lipgloss.Style {
 	switch level {
+	case TraceLevel:
+		return TraceLevelStyle
 	case DebugLevel:
 		return DebugLevelStyle
 	case InfoLevel:

@@ -6,8 +6,10 @@ import "strings"
 type Level int32
 
 const (
+	// TraceLevel is the trace level.
+	TraceLevel Level = iota - 1
 	// DebugLevel is the debug level.
-	DebugLevel Level = iota - 1
+	DebugLevel
 	// InfoLevel is the info level.
 	InfoLevel
 	// WarnLevel is the warn level.
@@ -23,6 +25,8 @@ const (
 // String returns the string representation of the level.
 func (l Level) String() string {
 	switch l {
+	case TraceLevel:
+		return "trace"
 	case DebugLevel:
 		return "debug"
 	case InfoLevel:
@@ -41,6 +45,8 @@ func (l Level) String() string {
 // ParseLevel converts level in string to Level type. Default level is InfoLevel.
 func ParseLevel(level string) Level {
 	switch strings.ToLower(level) {
+	case TraceLevel.String():
+		return TraceLevel
 	case DebugLevel.String():
 		return DebugLevel
 	case InfoLevel.String():

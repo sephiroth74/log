@@ -41,6 +41,11 @@ func TestCallerFormatter(t *testing.T) {
 			format:   ShortCallerFormatter,
 		},
 		{
+			name:     "short caller formatter",
+			expected: fmt.Sprintf("INFO <options_test.go:%d> hi\n", line+1),
+			format:   FilenameCallerFormatter,
+		},
+		{
 			name:     "long caller formatter",
 			expected: fmt.Sprintf("INFO <%s:%d> hi\n", file, line+1),
 			format:   LongCallerFormatter,
